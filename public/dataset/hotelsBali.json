@@ -1,0 +1,502 @@
+[
+  {
+    "Name": "Khaiyyara Jimbaran Bali",
+    "Picture": "./public/assets/hotelsBali/khaiyyara_jimbaran_bali.jpg",
+    "Category": "4-star hotel",
+    "Rating": 4.8,
+    "Address": "Jimbaran, Bali",
+    "Contact": "",
+    "Price": "Rp 323.979",
+    "Amenities": "Free Wi-Fi"
+  },
+  {
+    "Name": "Keraton Jimbaran Resort",
+    "Picture": "./public/assets/hotelsBali/keraton_jimbaran_beach_resort.jpeg",
+    "Category": "4-star hotel",
+    "Rating": 4.3,
+    "Address": "Jimbaran Beach, Kuta Selatan, Bali",
+    "Contact": "",
+    "Price": "Rp 862.996",
+    "Amenities": "Free Wi-Fi Breakfast Free parking Outdoor pool Air-conditioned Laundry service Pet-friendly Beach access Room service Kid-friendly Restaurant Airport shuttle Spa Fitness center"
+  },
+  {
+    "Name": "Lumbini Villas and Spa",
+    "Picture": "./public/assets/hotelsBali/lumbini_luxury_villas_spa.jpg",
+    "Category": "5-star hotel",
+    "Rating": 4.4,
+    "Address": "Jimbaran, Bali",
+    "Contact": "",
+    "Price": "Rp 1.405.273",
+    "Amenities": "Free Wi-Fi Free breakfast Free parking Accessible Outdoor pool Air-conditioned Laundry service Pet-friendly Room service Kid-friendly Restaurant Kitchen in all rooms Airport shuttle Spa Fitness center Bar"
+  },
+  {
+    "Name": "Royal Tulip Springhill Resort Jimbaran",
+    "Picture": "./public/assets/hotelsBali/royal_tulip_springhill_resort_jimbaran.jpg",
+    "Category": "5-star hotel",
+    "Rating": 4.5,
+    "Address": "Jimbaran, Bali",
+    "Contact": "",
+    "Price": "Rp 1.155.124",
+    "Amenities": "Free Wi-Fi Breakfast Free parking Accessible Outdoor pool Air-conditioned Laundry service Pet-friendly Room service Kid-friendly Restaurant Kitchens in some rooms Airport shuttle Spa Fitness center Bar"
+  },
+  {
+    "Name": "Le Grande Hotel Bali",
+    "Picture": "./public/assets/hotelsBali/le_grande_hotel.jpg",
+    "Category": "5-star hotel",
+    "Rating": 4.1,
+    "Address": "Uluwatu, Pecatu, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 505.636",
+    "Amenities": "Free Wi-Fi Free breakfast Free parking Accessible Outdoor pool Air-conditioned Laundry service Pet-friendly Room service Kid-friendly Restaurant Kitchens in some rooms Airport shuttle Hot tub Spa Fitness center Smoke-free"
+  },
+  {
+    "Name": "The Bingin Sari Jimbaran",
+    "Picture": "./public/assets/hotelsBali/the_bingin_sari_jimbaran.jpg",
+    "Category": "",
+    "Rating": 4.7,
+    "Address": "Jimbaran, Bali",
+    "Contact": "",
+    "Price": "Rp 265.771",
+    "Amenities": "Free Wi-Fi Free breakfast Free parking Pool Air-conditioned Pet-friendly Restaurant Airport shuttle Fitness center Smoke-free"
+  },
+  {
+    "Name": "Swiss-Belresort Pecatu",
+    "Picture": "./public/assets/hotelsBali/swiss_belresort_pecatu.jpg",
+    "Category": "4-star hotel",
+    "Rating": 4.5,
+    "Address": "Pecatu, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 570.545",
+    "Amenities": "Free Wi-Fi Paid breakfast Free parking Accessible Outdoor pool Air-conditioned Laundry service Business center Pet-friendly Room service Kid-friendly Restaurant Airport shuttle Spa Fitness center Golf course Bar Smoke-free"
+  },
+  {
+    "Name": "Jimbaran Bay Beach Resort & Spa",
+    "Picture": "./public/assets/hotelsBali/jimbaran_bay_beach_resort_spa.jpg",
+    "Category": "4-star hotel",
+    "Rating": 4.4,
+    "Address": "Jimbaran, Bali",
+    "Contact": "",
+    "Price": "Rp 514.101",
+    "Amenities": "Free Wi-Fi Breakfast Free parking Accessible Outdoor pool Air-conditioned Laundry service Pet-friendly Beach access Room service Kid-friendly Restaurant Kitchens in some rooms Airport shuttle Spa Fitness center Bar"
+  },
+  {
+    "Name": "Four Points by Sheraton Bali, Ungasan",
+    "Picture": "./public/assets/hotelsBali/four_points_by_sheraton.jpg",
+    "Category": "4-star hotel",
+    "Rating": 4.6,
+    "Address": "Ungasan, Kuta Selatan, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 1.000.000",
+    "Amenities": "Free Wi-Fi Breakfast Free parking Accessible Outdoor pool Air-conditioned Business center Pet-friendly Room service Restaurant Airport shuttle Spa Fitness center Bar Smoke-free"
+  },
+  {
+    "Name": "Liberta Hotel Seminyak",
+    "Picture": "./public/assets/hotelsBali/DenpasarUtara_liberta_hotel_seminyak.jpg",
+    "Category": "3-star hotel",
+    "Rating": 4,
+    "Address": "Seminyak, Kuta Utara, Badung, Bali",
+    "Contact": "",
+    "Price": "",
+    "Amenities": "Free Wi-Fi"
+  },
+  {
+    "Name": "Apple Villa & Suites seminyak",
+    "Picture": "./public/assets/hotelsBali/DenpasarUtara_apple_villa_seminyak.jpg",
+    "Category": "",
+    "Rating": 4.4,
+    "Address": "Seminyak, Kuta Utara, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 423.787",
+    "Amenities": "Free Wi-Fi"
+  },
+  {
+    "Name": "Kamaniiya Petitenget Seminyak",
+    "Picture": "./public/assets/hotelsBali/DenpasarUtara_kamaniiya_petitenget_seminyak.jpg",
+    "Category": "4-star hotel",
+    "Rating": 4.6,
+    "Address": "Petitenget, Seminyak, Kuta Utara, Badung, Bali",
+    "Contact": "",
+    "Price": "",
+    "Amenities": "Free Wi-Wi"
+  },
+  {
+    "Name": "Umalas Suites",
+    "Picture": "./public/assets/hotelsBali/DenpasarUtara_umalas_suites.jpeg",
+    "Category": "",
+    "Rating": 4.6,
+    "Address": "Umalas, Kuta Utara, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 1.140.496",
+    "Amenities": "Free Wi-Fi Free breakfast Free parking Outdoor pool Air-conditioned Laundry service Kid-friendly Restaurant Airport shuttle Fitness center"
+  },
+  {
+    "Name": "Taulan Villa and Restaurant",
+    "Picture": "./public/assets/hotelsBali/DenpasarUtara_taulan_villa.jpg",
+    "Category": "",
+    "Rating": 4.1,
+    "Address": "Ubud, Gianyar, Bali",
+    "Contact": "",
+    "Price": "Rp 787.320",
+    "Amenities": "Free Wi-Fi Free breakfast Free parking Outdoor pool Air-conditioned Laundry service Kid-friendly Restaurant Fitness center"
+  },
+  {
+    "Name": "Dewani Villa Resort",
+    "Picture": "./public/assets/hotelsBali/DenpasarUtara_dewani_villa_resort.jpg",
+    "Category": "3-star hotel",
+    "Rating": 4.4,
+    "Address": "Ubud, Gianyar, Bali",
+    "Contact": "",
+    "Price": "Rp 391.627",
+    "Amenities": "Free Wi-Fi Free parking Outdoor pool Air-conditioned Laundry service Pet-friendly Room service Kid-friendly Restaurant Airport shuttle Hot tub Spa Fitness center"
+  },
+  {
+    "Name": "The Eight Bali Seminyak",
+    "Picture": "./public/assets/hotelsBali/DenpasarUtara_the_eight_bali_seminyak.jpg",
+    "Category": "",
+    "Rating": 4.8,
+    "Address": "Seminyak, Kuta Utara, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 537.190",
+    "Amenities": "Free Wi-Fi Free breakfast Free parking Outdoor pool Air-conditioned Laundry service Pet-friendly Fitness center"
+  },
+  {
+    "Name": "Nauna Villa Bali",
+    "Picture": "./public/assets/hotelsBali/DenpasarUtara_nauna_villa_bali.jpg",
+    "Category": "",
+    "Rating": 4.8,
+    "Address": "Ubud, Gianyar, Bali",
+    "Contact": "",
+    "Price": "Rp 513.164",
+    "Amenities": "Free Wi-Fi Free breakfast Free parking Outdoor pool Air-conditioned Laundry service Fitness center"
+  },
+  {
+    "Name": "D'Home Seminyak",
+    "Picture": "./public/assets/hotelsBali/DenpasarUtara_dhome_seminyak.jpg",
+    "Category": "",
+    "Rating": 4.4,
+    "Address": "Seminyak, Kuta Utara, Badung, Bali",
+    "Contact": "",
+    "Price": "",
+    "Amenities": ""
+  },
+  {
+    "Name": "Lacrissa Bali",
+    "Picture": "./public/assets/hotelsBali/DenpasarUtara_lacrissa_bali.jpg",
+    "Category": "",
+    "Rating": 4.8,
+    "Address": "Ubud, Gianyar, Bali",
+    "Contact": "",
+    "Price": "Rp 1.068.750",
+    "Amenities": "Free Wi-Fi"
+  },
+  {
+    "Name": "Manzelejepun Luxury Villas & Pavilion",
+    "Picture": "./public/assets/hotelsBali/DenpasarTimur_manzelejepun_luxury_villa_pavilion.jpg",
+    "Category": "",
+    "Rating": 4.3,
+    "Address": "Denpasar Timur, Bali",
+    "Contact": "",
+    "Price": "Rp 563.248",
+    "Amenities": "Free Wi-Fi Free breakfast"
+  },
+  {
+    "Name": "Sanur Agung Hotel",
+    "Picture": "./public/assets/hotelsBali/DenpasarTimur_sanur_agung_hotel.jpg",
+    "Category": "3-star hotel",
+    "Rating": 3.7,
+    "Address": "Sanur, Denpasar, Bali",
+    "Contact": "",
+    "Price": "Rp 229.339",
+    "Amenities": "Free Wi-Fi Free parking Pool Air-conditioned Laundry service Beach access Restaurant Airport shuttle Fitness center"
+  },
+  {
+    "Name": "Warna Kedaton Hotel and Meetings",
+    "Picture": "./public/assets/hotelsBali/DenpasarTimur_warna_kedaton.jpg",
+    "Category": "3-star hotel",
+    "Rating": 3.3,
+    "Address": "Denpasar Timur, Bali",
+    "Contact": "",
+    "Price": "",
+    "Amenities": "Free Wi-Fi Free breakfast"
+  },
+  {
+    "Name": "The Lavana Villa Sutji Sanur",
+    "Picture": "./public/assets/hotelsBali/DenpasarTimur_lavana_villa_sutji_sanur.jpg",
+    "Category": "",
+    "Rating": 4.7,
+    "Address": "Sanur, Denpasar, Bali",
+    "Contact": "",
+    "Price": "Rp 591.089",
+    "Amenities": ""
+  },
+  {
+    "Name": "Verdant Bali Sekar Sari Sanur",
+    "Picture": "./public/assets/hotelsBali/DenpasarTimur_verdant_bali_sekar_sari.jpg",
+    "Category": "",
+    "Rating": 4.8,
+    "Address": "Sanur, Denpasar, Bali",
+    "Contact": "",
+    "Price": "Rp 597.062",
+    "Amenities": "Free Wi-Fi Free breakfast Parking Accessible Pool Air-conditioned Laundry service Business center Pet-friendly Room service Restaurant Kitchens in some rooms Airport shuttle Fitness center Smoke-free"
+  },
+  {
+    "Name": "Tropical Bali Hotel",
+    "Picture": "./public/assets/hotelsBali/DenpasarTimur_tropical_bali_hotel.jpg",
+    "Category": "4-star hotel",
+    "Rating": 4.7,
+    "Address": "Denpasar Timur, Bali",
+    "Contact": "",
+    "Price": "Rp 727.273",
+    "Amenities": "Free Wi-Fi Free breakfast Free parking Outdoor pool Air-conditioned Laundry service Pet-friendly Kid-friendly Restaurant Airport shuttle Fitness center"
+  },
+  {
+    "Name": "Oranjje Denpasar Hotel",
+    "Picture": "./public/assets/hotelsBali/DenpasarTimur_oranjje_denpasar_hotel.jpg",
+    "Category": "3-star hotel",
+    "Rating": 3.7,
+    "Address": "Denpasar, Bali",
+    "Contact": "",
+    "Price": "Rp 251.942",
+    "Amenities": "Free Wi-Fi Free breakfast Free parking Outdoor pool Air-conditioned Laundry service Business center Pet-friendly Room service Kid-friendly Restaurant Airport shuttle Fitness center Smoke-free"
+  },
+  {
+    "Name": "Aston Denpasar Hotel & Convention Center",
+    "Picture": "./public/assets/hotelsBali/DenpasarTimur_aston_denpasar_hotel_and_convention_center.jpg",
+    "Category": "4-star hotel",
+    "Rating": 4.3,
+    "Address": "Denpasar, Bali",
+    "Contact": "",
+    "Price": "Rp 454.043",
+    "Amenities": "Free Wi-Fi Free breakfast Free parking Accessible Outdoor pool Air-conditioned Laundry service Pet-friendly Room service Kid-friendly Restaurant Airport shuttle Spa Fitness center Smoke-free"
+  },
+  {
+    "Name": "Puri Nusa Indah Hotel",
+    "Picture": "./public/assets/hotelsBali/DenpasarTimur_puri_nusa_indah_hotel.jpg",
+    "Category": "4-star hotel",
+    "Rating": 4.2,
+    "Address": "Denpasar Timur, Bali",
+    "Contact": "",
+    "Price": "Rp 217.091",
+    "Amenities": "Wi-Fi Breakfast Free parking Accessible Outdoor pool Air-conditioned Laundry service Pet-friendly Kid-friendly Restaurant Airport shuttle Fitness center"
+  },
+  {
+    "Name": "Omatha Village",
+    "Picture": "./public/assets/hotelsBali/DenpasarTimur_omatha_village.jpg",
+    "Category": "3-star hotel",
+    "Rating": 4.4,
+    "Address": "Denpasar Timur, Bali",
+    "Contact": "",
+    "Price": "Rp 337.118",
+    "Amenities": "Free Wi-Fi Free breakfast Free parking Outdoor pool Air-conditioned Laundry service Pet-friendly Restaurant Kitchen in all rooms Airport shuttle Fitness center"
+  },
+  {
+    "Name": "Kuta Central Park Hotel Bali",
+    "Picture": "./public/assets/hotelsBali/DenpasarBarat_kuta_central_park_hotel.jpg",
+    "Category": "4-star hotel",
+    "Rating": 4.2,
+    "Address": "Kuta, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 63.105",
+    "Amenities": "Free Wi-Fi"
+  },
+  {
+    "Name": "Hotel Santika Seminyak Bali",
+    "Picture": "./public/assets/hotelsBali/DenpasarBarat_hotel_santika_seminyak.jpg",
+    "Category": "3-star hotel",
+    "Rating": 4.5,
+    "Address": "Seminyak, Kuta, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 353.195",
+    "Amenities": "Free Wi-Fi Breakfast Free parking Accessible Outdoor pool Air-conditioned Laundry service Pet-friendly Room service Kid-friendly Restaurant Airport shuttle Spa Fitness center"
+  },
+  {
+    "Name": "Sun Royal Hotel Bali",
+    "Picture": "./public/assets/hotelsBali/DenpasarBarat_sun_royal_hotel.jpg",
+    "Category": "3-star hotel",
+    "Rating": 4,
+    "Address": "Kuta, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 243.986",
+    "Amenities": "Free Wi-Fi"
+  },
+  {
+    "Name": "Savvoya Hotel",
+    "Picture": "./public/assets/hotelsBali/DenpasarBarat_savvoya_hotel.jpeg",
+    "Category": "3-star hotel",
+    "Rating": 4.2,
+    "Address": "Denpasar Barat, Bali",
+    "Contact": "",
+    "Price": "Rp 279.598",
+    "Amenities": "Free Wi-Fi"
+  },
+  {
+    "Name": "Inna Bali Heritage Hotel",
+    "Picture": "./public/assets/hotelsBali/DenpasarBarat_inna_bali_heritage_hotel.jpg",
+    "Category": "3-star hotel",
+    "Rating": 4.3,
+    "Address": "Denpasar, Bali",
+    "Contact": "",
+    "Price": "Rp 265.520",
+    "Amenities": "Free Wi-Fi Free breakfast"
+  },
+  {
+    "Name": "Hotel The Flora Kuta Bali",
+    "Picture": "./public/assets/hotelsBali/DenpasarSelatan_Hotel_the_flora_kuta.jpg",
+    "Category": "3-star hotel",
+    "Rating": 4,
+    "Address": "Kuta, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 121.059",
+    "Amenities": "Free Wi-Fi Free breakfast"
+  },
+  {
+    "Name": "Grandmas Plus Hotel Legian",
+    "Picture": "./public/assets/hotelsBali/DenpasarSelatan_grandmas_plus_hotel_legian.jpeg",
+    "Category": "2-star hotel",
+    "Rating": 4.5,
+    "Address": "Legian, Kuta, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 239.542",
+    "Amenities": "Free Wi-Fi"
+  },
+  {
+    "Name": "Cara Cara Inn",
+    "Picture": "./public/assets/hotelsBali/DenpasarSelatan_cara_cara_inn_bali.jpg",
+    "Category": "2-star hotel",
+    "Rating": 4.5,
+    "Address": "Kuta, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 251.308",
+    "Amenities": "Free Wi-Fi"
+  },
+  {
+    "Name": "Horison Kuta Bali",
+    "Picture": "./public/assets/hotelsBali/DenpasarSelatan_horison_kuta.jpg",
+    "Category": "",
+    "Rating": 4.4,
+    "Address": "Kuta, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 492.625",
+    "Amenities": ""
+  },
+  {
+    "Name": "Hotel ZIA Bali - Kuta",
+    "Picture": "./public/assets/hotelsBali/DenpasarSelatan_hotel_zia_bali.jpg",
+    "Category": "3-star hotel",
+    "Rating": 4.2,
+    "Address": "Kuta, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 135.547",
+    "Amenities": "Free Wi-Fi Breakfast Free parking Accessible Outdoor pool Air-conditioned Laundry service Pet-friendly Beach access Room service Kid-friendly Restaurant Airport shuttle Spa"
+  },
+  {
+    "Name": "Ohana Hotel Kuta",
+    "Picture": "./public/assets/hotelsBali/DenpasarSelatan_ohana_hotel_kuta.jpg",
+    "Category": "3-star hotel",
+    "Rating": 4.1,
+    "Address": "Kuta, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 258.216",
+    "Amenities": "Free Wi-Fi"
+  },
+  {
+    "Name": "Loft Legian Hotel",
+    "Picture": "./public/assets/hotelsBali/DenpasarSelatan_Loft_legian_hotel.jpeg",
+    "Category": "2-star hotel",
+    "Rating": 3.9,
+    "Address": "Legian, Kuta, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 189.111",
+    "Amenities": "Free Wi-Fi Paid breakfast Pool Air-conditioned Laundry service Pet-friendly Beach access Kid-friendly Restaurant Airport shuttle Fitness center"
+  },
+  {
+    "Name": "Rhadana Kuta Bali",
+    "Picture": "./public/assets/hotelsBali/DenpasarSelatan_rhadana_kuta.jpg",
+    "Category": "3-star hotel",
+    "Rating": 4.5,
+    "Address": "Kuta, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 34.120",
+    "Amenities": "Free Wi-Fi Breakfast Parking Outdoor pool Air-conditioned Laundry service Pet-friendly Room service Kid-friendly Restaurant Airport shuttle"
+  },
+  {
+    "Name": "Best Western Resort Kuta",
+    "Picture": "./public/assets/hotelsBali/DenpasarSelatan_best_western_resort.jpg",
+    "Category": "4-star hotel",
+    "Rating": 4.3,
+    "Address": "Kuta, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 381.817",
+    "Amenities": "Free Wi-Fi Breakfast Free parking Accessible Outdoor pool Air-conditioned Laundry service Pet-friendly Room service Kid-friendly Restaurant Airport shuttle Spa Fitness center Smoke-free"
+  },
+  {
+    "Name": "Golden Tulip Jineng Resort",
+    "Picture": "./public/assets/hotelsBali/DenpasarSelatan_golden_tulip_jineng_resort.jpg",
+    "Category": "4-star hotel",
+    "Rating": 4.2,
+    "Address": "Kuta, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 409.091",
+    "Amenities": "Free Wi-Fi"
+  },
+  {
+    "Name": "Eden Hotel Kuta Bali",
+    "Picture": "./public/assets/hotelsBali/DenpasarSelatan_eden_hotel_kuta.jpg",
+    "Category": "4-star hotel",
+    "Rating": 4.2,
+    "Address": "Kuta, Badung, Bali",
+    "Contact": "",
+    "Price": "Rp 295.009",
+    "Amenities": "Free Wi-Fi Breakfast Free parking Accessible Outdoor pool Air-conditioned Laundry service Pet-friendly Room service Kid-friendly Restaurant Airport shuttle Spa Fitness center Bar Smoke-free"
+  },
+  {
+    "Name": "Grand Mirah Boutique Hotel",
+    "Picture": "./public/assets/hotelsBali/DenpasarBarat_grand_mirah_boutique_hotel.jpg",
+    "Category": "3-star hotel",
+    "Rating": 4.4,
+    "Address": "Denpasar, Bali",
+    "Contact": "",
+    "Price": "Rp 275.103",
+    "Amenities": "Free Wi-Fi Free breakfast Free parking Outdoor pool Air-conditioned Laundry service Pet-friendly Room service Kid-friendly Restaurant Airport shuttle Spa Fitness center"
+  },
+  {
+    "Name": "ibis Styles Bali Denpasar",
+    "Picture": "./public/assets/hotelsBali/DenpasarBarat_ibis_styles_bali_denpasar.jpg",
+    "Category": "",
+    "Rating": 4.2,
+    "Address": "Denpasar, Bali",
+    "Contact": "",
+    "Price": "Rp 446.723",
+    "Amenities": "Free Wi-Fi"
+  },
+  {
+    "Name": "City of Aventus Hotel Denpasar",
+    "Picture": "./public/assets/hotelsBali/DenpasarBarat_city_of_aventus_hotel.jpg",
+    "Category": "3-star hotel",
+    "Rating": 4.3,
+    "Address": "Denpasar, Bali",
+    "Contact": "",
+    "Price": "",
+    "Amenities": ""
+  },
+  {
+    "Name": "Bali Paradise City Hotel Denpasar",
+    "Picture": "./public/assets/hotelsBali/DenpasarBarat_bali_paradise_city.jpg",
+    "Category": "3-star hotel",
+    "Rating": 4,
+    "Address": "Denpasar, Bali",
+    "Contact": "",
+    "Price": "Rp 273.641",
+    "Amenities": "Free Wi-Fi"
+  },
+  {
+    "Name": "Quest Hotel San Denpasar",
+    "Picture": "./public/assets/hotelsBali/DenpasarBarat_quest-san-denpasar.jpg",
+    "Category": "3-star hotel",
+    "Rating": 4.5,
+    "Address": "Denpasar, Bali",
+    "Contact": "",
+    "Price": "Rp 77.594",
+    "Amenities": "Free Wi-Fi Paid breakfast Free parking Accessible Outdoor pool Air-conditioned Laundry service Pet-friendly Room service Kid-friendly Restaurant Airport shuttle Spa Fitness center"
+  }
+]

@@ -1,0 +1,14 @@
+# Node/Next.js
+node_modules/
+.next/
+out/
+dist/
+build/
+.turbo/
+.vercel/
+coverage/
+# Env & OS
+.env*
+*.log
+.DS_Store
+"@
