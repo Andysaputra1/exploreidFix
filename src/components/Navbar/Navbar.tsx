@@ -1,17 +1,18 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react'; // Tambah useState & useEffect
 import Image from 'next/image';
 import Link from 'next/link';
 import { Filter, Search } from 'lucide-react';
 import SidebarFilter from './SidebarFilter';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabaseClient';
-import { User } from '@supabase/supabase-js';
+
+// Hapus import Supabase
 
 interface HeaderProps {
   searchQuery: string;
   onSearchChange: (value: string) => void;
+  onSearchSubmit?: () => void;
   selectedExperience?: string;
   selectedActivity?: string;
   selectedCrowdness?: string;
@@ -27,6 +28,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({
   searchQuery,
   onSearchChange,
+  onSearchSubmit,
   selectedExperience = '',
   selectedActivity = '',
   selectedCrowdness = '',
@@ -41,37 +43,33 @@ const Header: React.FC<HeaderProps> = ({
   const router = useRouter();
   const filterButtonRef = useRef<HTMLButtonElement | null>(null);
 
-  const [user, setUser] = useState<User | null>(null);
+  // ----- LOGIKA LOGIN/LOGOUT BARU (PAKAI LOCALSTORAGE) -----
   const [username, setUsername] = useState<string | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const { data: authData } = await supabase.auth.getUser();
-      if (authData?.user) {
-        setUser(authData.user);
-
-        const { data: profileData } = await supabase
-          .from('profiles')
-          .select('username')
-          .eq('id', authData.user.id)
-          .single();
-
-        if (profileData) {
-          setUsername(profileData.username);
-        }
+    // Cek localStorage saat komponen dimuat
+    const storedUser = localStorage.getItem('dummyUser');
+    if (storedUser) {
+      try {
+        const user = JSON.parse(storedUser);
+        setUsername(user.username);
+      } catch (e) {
+        console.error("Failed to parse dummyUser from localStorage", e);
+        localStorage.removeItem('dummyUser'); // Hapus data korup
       }
-    };
-    fetchUser();
-  }, []);
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
+    }
+  }, []); // [] berarti hanya jalan sekali saat load
+  
+  const handleLogout = () => {
+    // Hapus dari localStorage
+    localStorage.removeItem('dummyUser');
     setUsername(null);
     setDropdownOpen(false);
-    window.location.reload();
+    window.location.reload(); // Reload halaman untuk reset state
   };
+  // ----- AKHIR LOGIKA BARU -----
+  
 
   useEffect(() => {
     const handleSidebarBlur = () => {
@@ -85,16 +83,19 @@ const Header: React.FC<HeaderProps> = ({
     };
   }, [showFilter, onToggleFilter]);
 
+  // ... (Fungsi handler search & filter tetap sama) ...
   const handleSearchSubmitManual = () => {
-    router.push(`/explore?show=all&q=${encodeURIComponent(searchQuery.trim())}&filterOpen=false&animateFilter=false`);
+    if (onSearchSubmit) {
+      onSearchSubmit();
+    } else {
+      router.push(`/explore?show=all&q=${encodeURIComponent(searchQuery.trim())}&filterOpen=false&animateFilter=false`);
+    }
   };
-
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleSearchSubmitManual();
     }
   };
-
   const handleFilterButtonClick = () => {
     if (onToggleFilter) {
       onToggleFilter();
@@ -106,11 +107,11 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <header className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 bg-[#2d2e31] py-4 px-6 rounded-3xl shadow-xl w-[95%] max-w-screen-lg">
       <div className="flex items-center justify-between gap-4">
+        {/* ... (Logo & Nav Links tetap sama) ... */}
         <div className="flex items-center gap-8">
           <div className="flex items-center gap-2">
             <Image src="/logo.png" alt="Logo" width={36} height={36} className="object-contain" />
           </div>
-
           <nav className="flex gap-6 text-white font-medium">
             <Link href="/" className="hover:text-blue-300 transition">Home</Link>
             <Link href="/explore" className="hover:text-blue-300 transition">Explore</Link>
@@ -119,6 +120,7 @@ const Header: React.FC<HeaderProps> = ({
         </div>
 
         <div className="flex items-center gap-6 justify-end">
+          {/* ... (Search bar & Filter button tetap sama) ... */}
           <div className="flex items-center bg-white/90 px-4 py-2 rounded-full shadow-lg w-[400px]" suppressHydrationWarning>
             <Search className="text-gray-500 mr-2" size={16} />
             <input
@@ -138,7 +140,6 @@ const Header: React.FC<HeaderProps> = ({
               Search
             </button>
           </div>
-
           <button
             ref={filterButtonRef}
             onClick={handleFilterButtonClick}
@@ -148,17 +149,18 @@ const Header: React.FC<HeaderProps> = ({
             <Filter size={16} />
             Filter
           </button>
-
+          
+          {/* ----- LOGIKA TAMPILAN LOGIN BARU ----- */}
           <div className="relative">
-            {user ? (
+            {username ? (
+              // Jika sudah login, tampilkan nama & dropdown logout
               <>
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                   className="px-4 py-2 bg-green-600 text-white rounded-full hover:bg-green-700 transition"
                 >
-                  {username ?? user?.email?.split('@')[0] ?? 'User'}
+                  {username}
                 </button>
-
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded-lg shadow-xl z-50">
                     <button
@@ -171,7 +173,7 @@ const Header: React.FC<HeaderProps> = ({
                 )}
               </>
             ) : (
-
+              // Jika belum login, tampilkan tombol Login
               <Link href="/login">
                 <button className="px-4 py-2 bg-blue-300 text-black rounded-full hover:bg-blue-400 transition">
                   Login
@@ -179,9 +181,12 @@ const Header: React.FC<HeaderProps> = ({
               </Link>
             )}
           </div>
+          {/* ----- AKHIR DARI LOGIKA TAMPILAN LOGIN ----- */}
+          
         </div>
       </div>
 
+      {/* ... (SidebarFilter tetap sama) ... */}
       {showFilter && onToggleFilter && (
         <SidebarFilter
           selectedExperience={selectedExperience}

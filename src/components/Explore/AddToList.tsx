@@ -1,14 +1,17 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
-import { Destination } from '@/app/explore/page'; // Import Destination dari page.tsx (Explore)
+// Hapus 'import { Destination }' jika ada, kita tidak perlu lagi
 
 interface AddToListProps {
-  destination: Destination;
+  // Hanya terima 'placeName' sebagai string
+  placeName: string;
 }
 
-const AddToList: React.FC<AddToListProps> = ({ destination }) => {
-  const placeName = destination.Place;
+const AddToList: React.FC<AddToListProps> = ({ placeName }) => {
   const [added, setAdded] = useState(false);
 
+  // useEffect sekarang bergantung pada placeName
   useEffect(() => {
     const list = JSON.parse(localStorage.getItem('myList') || '[]');
     setAdded(list.includes(placeName));
@@ -21,13 +24,13 @@ const AddToList: React.FC<AddToListProps> = ({ destination }) => {
       const newList = list.filter((item: string) => item !== placeName);
       localStorage.setItem('myList', JSON.stringify(newList));
       setAdded(false);
-      window.dispatchEvent(new Event('myListUpdated'));
     } else {
       list.push(placeName);
       localStorage.setItem('myList', JSON.stringify(list));
       setAdded(true);
-      window.dispatchEvent(new Event('myListUpdated'));
     }
+    // Kirim event agar ExploreClient bisa update daftar favorites
+    window.dispatchEvent(new Event('myListUpdated'));
   };
 
   return (
