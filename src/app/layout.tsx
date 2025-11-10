@@ -2,6 +2,9 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 
+// 1. Impor BottomNav
+import BottomNav from "@/components/Navbar/BottomNav";
+
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
@@ -22,7 +25,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {children}
+        
+        {/* 2. Beri padding-bottom di HP (pb-16) agar konten tidak tertutup BottomNav */}
+        {/* Di desktop (md:pb-0), padding di-nol-kan lagi. */}
+        <main className="pb-16 md:pb-0">
+          {children}
+        </main>
+        
+        {/* 3. Tambahkan BottomNav di sini */}
+        <BottomNav />
+        
       </body>
     </html>
   )

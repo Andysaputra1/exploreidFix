@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Header from '@/components/Navbar/Navbar';
 import DetailDestination from '@/components/Explore/DetailDestination';
@@ -10,7 +10,7 @@ import Footer from '@/components/Footer/Footer';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-// ----- SEMUA INTERFACE -----
+// ----- SEMUA INTERFACE (PASTIKAN ADA 'export') -----
 export interface Destination {
   Place: string;
   Picture: string;
@@ -42,20 +42,19 @@ export interface DetailPageData {
   hotels: Hotel[];
 }
 
-// ----- PROPS BARU DARI SERVER -----
+// ----- PROPS BARU DARI SERVER (LEBIH SEDERHANA) -----
 interface ExploreClientProps {
-  allDestinations: Destination[]; // List lengkap untuk Detail & Favorites
-  filteredDestinations?: Destination[]; // List sudah difilter
+  allDestinations: Destination[]; // List lengkap
   initialTopRecommendations?: Destination[];
-  detailPageData?: DetailPageData | null; // Data untuk halaman detail
-  showAllDestinations: boolean; // boolean dari server
-  showDetailPage: boolean; // boolean dari server
+  detailPageData?: DetailPageData | null; 
+  showDetailPage: boolean; 
 }
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
+// ... (sisa variants Anda) ...
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
   visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: 'easeOut' } },
@@ -66,17 +65,69 @@ const cardVariants = {
   hover: { scale: 1.05, transition: { duration: 0.2 } },
 };
 
+// ----- FUNGSI FILTER (PINDAH DARI SERVER KE SINI) -----
+function applyFilters(
+  allDestinations: Destination[],
+  query: string,
+  experience: string,
+  activity: string,
+  crowdness: string
+): Destination[] {
+  let currentFilteredData = [...allDestinations]; 
+
+  if (experience) {
+    currentFilteredData = currentFilteredData.filter(destination => {
+      const description = destination.Description.toLowerCase();
+      if (experience === 'Nature' && (description.includes('nature') || description.includes('mountain') || description.includes('rice fields') || description.includes('valley') || description.includes('waterfall') || description.includes('garden') || description.includes('forest') || description.includes('park'))) return true;
+      if (experience === 'Beach' && (description.includes('beach') || description.includes('coast'))) return true;
+      if (experience === 'Cultural & Temple Visits' && (description.includes('temple') || description.includes('cultural') || description.includes('hindu'))) return true;
+      if (experience === 'Adventure' && (description.includes('volcano') || description.includes('trek') || description.includes('swing') || description.includes('rafting') || description.includes('safari') || description.includes('water park') || description.includes('zoo'))) return true;
+      if (experience === 'Wildlife' && (description.includes('monkey') || description.includes('zoo') || description.includes('bird') || description.includes('reptile') || description.includes('animal'))) return true;
+      if (experience === 'Relaxation & Scenic Views' && (description.includes('scenic') || description.includes('gardens') || description.includes('ridge walk') || description.includes('retreat') || description.includes('hot spring'))) return true;
+      if (experience === 'Historical Sites' && (description.includes('ancient') || description.includes('historical') || description.includes('monument') || description.includes('palace') || description.includes('sanctuary'))) return true;
+      return false;
+    });
+  }
+  if (activity) {
+    currentFilteredData = currentFilteredData.filter(destination => {
+      const description = destination.Description.toLowerCase();
+      const place = destination.Place.toLowerCase();
+      if (activity === 'Sightseeing' && (description.includes('tourist') || description.includes('icon') || description.includes('destination') || description.includes('cultural park') || description.includes('landmark') || description.includes('village') || description.includes('scenic'))) return true;
+      if (activity === 'Hiking & Trekking' && (description.includes('trek') || description.includes('hiking') || place.includes('mount'))) return true;
+      if (activity === 'Swimming & Snorkeling' && (description.includes('bathing') || description.includes('swimming') || description.includes('water park') || place.includes('beach') || place.includes('waterboom'))) return true;
+      if (activity === 'Photography' && (description.includes('photography') || description.includes('scenic') || description.includes('views') || description.includes('gardens'))) return true;
+      if (activity === 'Spiritual & Religious' && (description.includes('temple') || description.includes('hindu') || description.includes('pilgrimage') || description.includes('spiritual') || description.includes('holy spring'))) return true;
+      if (activity === 'Shopping & Local Markets' && (description.includes('market') || description.includes('souvenirs') || description.includes('handicrafts') || description.includes('produce'))) return true;
+      return false;
+    });
+  }
+  if (crowdness) {
+    currentFilteredData = currentFilteredData.filter(destination => {
+      const googleReviewsCount = destination["Google Reviews (Count)"];
+      if (crowdness === 'Popular & Crowded') return googleReviewsCount > 10000;
+      if (crowdness === 'Quiet & Less Touristy') return googleReviewsCount <= 5000;
+      if (crowdness === "Doesn't Matter") return true;
+      return false;
+    });
+  }
+  if (query) {
+    const q = query.toLowerCase();
+    currentFilteredData = currentFilteredData.filter((destination) =>
+      destination.Place.toLowerCase().includes(q)
+    );
+  }
+  return currentFilteredData;
+}
+
 
 export default function ExploreClient({
-  allDestinations, // Ini SELALU ada
-  filteredDestinations = [], // Default array kosong
-  initialTopRecommendations = [], // Default array kosong
-  detailPageData = null, // Default null
-  showAllDestinations,
+  allDestinations,
+  initialTopRecommendations = [],
+  detailPageData = null,
   showDetailPage,
 }: ExploreClientProps) {
   
-  // State 'destinations' menggunakan list LENGKAP (untuk logic favorites)
+  // State untuk list LENGKAP (dari props)
   const [destinations, setDestinations] = useState<Destination[]>(allDestinations);
   const [favorites, setFavorites] = useState<Destination[]>([]);
   const [topRecommendations, setTopRecommendations] = useState<Destination[]>(initialTopRecommendations);
@@ -84,15 +135,27 @@ export default function ExploreClient({
   const router = useRouter();
   const searchParams = useSearchParams();
   
-  const urlQuery = searchParams.get('q') || '';
-  const placeQuery = searchParams.get('place') || ''; // Dapatkan place dari URL
+  // ----- STATE BARU UNTUK FILTERING -----
+  // State untuk filter UI (diisi dari URL)
+  const [searchInputValue, setSearchInputValue] = useState<string>(searchParams.get('q') || '');
+  const [selectedExperience, setSelectedExperience] = useState<string>(searchParams.get('experience') || '');
+  const [selectedActivity, setSelectedActivity] = useState<string>(searchParams.get('activity') || '');
+  const [selectedCrowdness, setSelectedCrowdness] = useState<string>(searchParams.get('crowdness') || '');
+  
+  // State untuk list yang SUDAH DIFILTER
+  // Kita gunakan 'useMemo' agar filter hanya jalan saat dependency berubah
+  const filteredDestinations = useMemo(() => {
+    return applyFilters(
+      destinations, 
+      searchInputValue, 
+      selectedExperience, 
+      selectedActivity, 
+      selectedCrowdness
+    );
+  }, [destinations, searchInputValue, selectedExperience, selectedActivity, selectedCrowdness]);
+  // ------------------------------------
 
-  // State ini hanya untuk UI filter
-  const [selectedExperience, setSelectedExperience] = useState<string>('');
-  const [selectedActivity, setSelectedActivity] = useState<string>('');
-  const [selectedCrowdness, setSelectedCrowdness] = useState<string>('');
-  const [showFilter, setShowFilter] = useState<boolean>(false);
-  const [searchInputValue, setSearchInputValue] = useState<string>(urlQuery);
+  const [showFilter, setShowFilter] = useState<boolean>(searchParams.get('filterOpen') === 'true');
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -103,14 +166,7 @@ export default function ExploreClient({
     };
   }, []);
 
-  useEffect(() => {
-    // sinkronkan filter & search dari URL
-    setSelectedExperience(searchParams.get('experience') || '');
-    setSelectedActivity(searchParams.get('activity') || '');
-    setSelectedCrowdness(searchParams.get('crowdness') || '');
-    setShowFilter(searchParams.get('filterOpen') === 'true');
-    setSearchInputValue(searchParams.get('q') || '');
-  }, [searchParams]);
+  // Hapus useEffect [searchParams] yang lama
 
   // useEffect untuk favorites (localStorage) TETAP di sini
   useEffect(() => {
@@ -126,86 +182,111 @@ export default function ExploreClient({
         } catch { setFavorites([]); }
       } else { setFavorites([]); }
     };
-    if (destinations.length > 0) {
-      updateFavorites();
-    }
+    if (destinations.length > 0) { updateFavorites(); }
     window.addEventListener('myListUpdated', updateFavorites);
     return () => window.removeEventListener('myListUpdated', updateFavorites);
   }, [destinations]);
 
-  // ----- SEMUA FUNGSI HANDLER TETAP SAMA (Hanya mengubah URL) -----
-  const updateFilterParams = useCallback(
-    (experience: string, activity: string, crowdness: string, filterOpen: boolean, currentQuery: string) => {
-      const params = new URLSearchParams();
-      if (experience) params.set('experience', experience);
-      if (activity) params.set('activity', activity);
-      if (crowdness) params.set('crowdness', crowdness);
-      if (filterOpen) params.set('filterOpen', 'true');
-      params.set('show', 'all');
-      if (currentQuery) params.set('q', currentQuery);
-      router.push(`/explore?${params.toString()}`); 
-    },
-    [router]
-  );
-  
-  const handleSearch = useCallback(
-    (query: string) => {
-      updateFilterParams(selectedExperience, selectedActivity, selectedCrowdness, showFilter, query);
-    },
-    [selectedExperience, selectedActivity, selectedCrowdness, showFilter, updateFilterParams]
-  );
-  const handleSearchInputChange = (value: string) => setSearchInputValue(value);
-  const handleSearchSubmit = () => handleSearch(searchInputValue);
-  const handleExperienceChange = useCallback((value: string) => setSelectedExperience(value),[]);
-  const handleActivityChange = useCallback((value: string) => setSelectedActivity(value),[]);
-  const handleCrowdnessChange = useCallback((value: string) => setSelectedCrowdness(value),[]);
 
+  // ----- FUNGSI HANDLER DISESUAIKAN UNTUK 'LIVE' SEARCH -----
+  
+  // Fungsi ini sekarang HANYA mengupdate URL, tanpa reload halaman
+  const updateUrlParams = (params: URLSearchParams) => {
+    router.replace(`/explore?${params.toString()}`, { scroll: false });
+  };
+
+  // Ini adalah 'LIVE' search. Langsung update state.
+  const handleSearchInputChange = (value: string) => {
+    setSearchInputValue(value);
+    // Update URL juga
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) params.set('q', value);
+    else params.delete('q');
+    updateUrlParams(params);
+  };
+  
+  // Submit sekarang tidak me-reload, hanya menutup search bar HP
+  const handleSearchSubmit = () => {
+    // Logic untuk menutup search bar HP ada di Navbar.tsx
+    // Kita tidak perlu melakukan apa-apa di sini
+  };
+
+  // Fungsi filter sekarang HANYA update state
+  const handleExperienceChange = useCallback((value: string) => {
+    setSelectedExperience(value);
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) params.set('experience', value);
+    else params.delete('experience');
+    updateUrlParams(params);
+  }, [searchParams, router]);
+
+  const handleActivityChange = useCallback((value: string) => {
+    setSelectedActivity(value);
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) params.set('activity', value);
+    else params.delete('activity');
+    updateUrlParams(params);
+  }, [searchParams, router]);
+
+  const handleCrowdnessChange = useCallback((value: string) => {
+    setSelectedCrowdness(value);
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) params.set('crowdness', value);
+    else params.delete('crowdness');
+    updateUrlParams(params);
+  }, [searchParams, router]);
+
+  // Apply/Reset hanya menutup modal (state sudah live)
   const handleApplyFilter = useCallback(() => {
     setShowFilter(false);
-    updateFilterParams(selectedExperience, selectedActivity, selectedCrowdness, false, searchInputValue);
-  }, [selectedExperience, selectedActivity, selectedCrowdness, searchInputValue, updateFilterParams]);
+  }, []);
 
   const handleResetFilter = useCallback(() => {
     setSelectedExperience('');
     setSelectedActivity('');
     setSelectedCrowdness('');
     setShowFilter(false);
-    updateFilterParams('', '', '', false, searchInputValue);
-  }, [searchInputValue, updateFilterParams]);
+    // Hapus juga dari URL
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete('experience');
+    params.delete('activity');
+    params.delete('crowdness');
+    updateUrlParams(params);
+  }, [searchParams, router]);
 
   const handleToggleFilter = useCallback(() => setShowFilter(!showFilter), [showFilter]);
   const handleCardClick = useCallback((p: string) => router.push(`/explore?place=${encodeURIComponent(p)}`),[router]);
-  // ----- AKHIR DARI FUNGSI HANDLER -----
-  
+  // ----------------------------------------------------
 
-  // ----- LOGIKA RENDER UTAMA -----
-  
+
   // SCENARIO 1: Tampilkan Halaman Detail
-  // Kita gunakan 'showDetailPage' dan 'detailPageData' dari server
   if (showDetailPage && detailPageData) {
     return (
       <DetailDestination
-        // Kirim data yang sudah siap dari server
         destination={detailPageData.destination}
         reviews={detailPageData.reviews}
         hotels={detailPageData.hotels}
-        
-        // Kirim list lengkap untuk logic 'AddToList'
         allDestinationsForFavorites={allDestinations}
       />
     );
   }
 
-  // SCENARIO 2: Tampilkan Halaman Explore (Default atau Terfilter)
-  const shouldShowAllDestinations = showAllDestinations;
+  // SCENARIO 2: Tampilkan Halaman Explore
+  // Cek apakah ada filter aktif atau search query
+  const hasFilters = !!(searchInputValue || selectedExperience || selectedActivity || selectedCrowdness);
+  // Cek apakah 'show=all' ada di URL
+  const showAllQuery = searchParams.get('show') === 'all';
+  
+  const shouldShowAllDestinations = showAllQuery || hasFilters;
 
   return (
     <div className="min-h-screen bg-[#060c20] text-white overflow-x-hidden relative">
       <main className="flex-1 py-6 max-w-7xl mx-auto px-4 transition-all duration-500">
         <Header
           searchQuery={searchInputValue}
-          onSearchChange={handleSearchInputChange}
-          onSearchSubmit={handleSearchSubmit}
+          onSearchChange={handleSearchInputChange} // Ini sekarang LIVE
+          onSearchSubmit={handleSearchSubmit} // Ini hanya untuk UI
+          
           selectedExperience={selectedExperience}
           selectedActivity={selectedActivity}
           selectedCrowdness={selectedCrowdness}
@@ -222,16 +303,16 @@ export default function ExploreClient({
           shouldShowAllDestinations ? (
             <motion.div key="all-destinations-view" variants={containerVariants} initial="hidden" animate="visible">
               <motion.h2 variants={itemVariants} className="text-2xl font-semibold text-center w-full mb-10 mt-32">
-                {urlQuery || selectedExperience || selectedActivity || selectedCrowdness
-                  ? 'Search/Filter Results'
-                  : 'All Destinations in Bali'}
+                {hasFilters ? 'Search/Filter Results' : 'All Destinations in Bali'}
               </motion.h2>
-              {/* Kirim data yang SUDAH DIFILTER dari server */}
+              
+              {/* Kirim list yang SUDAH DIFILTER oleh 'useMemo' */}
               <AllDestinations destinations={filteredDestinations} />
+              
             </motion.div>
           ) : (
             <motion.div key="default-explore-view" variants={containerVariants} initial="hidden" animate="visible">
-              {/* ... (JSX untuk 'Favorite Destination' tetap sama) ... */}
+              {/* Tampilan default (Favorites & Top Recs) */}
               <div className="mt-32 mb-6 transition-all duration-500">
                 <motion.h2 variants={itemVariants} className="text-2xl font-semibold mb-4">
                   Favorite Destination
@@ -249,7 +330,6 @@ export default function ExploreClient({
                 </div>
               </div>
               
-              {/* ... (JSX untuk 'Top Recommendations' tetap sama) ... */}
               {topRecommendations.length > 0 && (
                 <div className="mt-10 mb-6 transition-all duration-500">
                   <div className="flex justify-between items-center mb-4">
@@ -274,7 +354,7 @@ export default function ExploreClient({
         )}
       </main>
 
-      <Itinerary place={placeQuery || urlQuery || 'your destination'} />
+      <Itinerary place={detailPageData?.destination.Place || searchInputValue || 'your destination'} />
       <Footer />
     </div>
   );
@@ -282,7 +362,6 @@ export default function ExploreClient({
 
 // DestinationCard tetap sama
 function DestinationCard({ dest, onClick }: { dest: Destination; onClick: (place: string) => void }) {
-  // ... (JSX untuk DestinationCard) ...
   return (
     <motion.div
       variants={cardVariants}
@@ -304,7 +383,6 @@ function DestinationCard({ dest, onClick }: { dest: Destination; onClick: (place
           />
         </div>
       </motion.div>
-
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
       <div className="absolute bottom-5 left-5 text-white z-10">
         <p className="text-xl font-bold drop-shadow">{dest.Place}</p>

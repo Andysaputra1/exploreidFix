@@ -204,11 +204,8 @@ const DetailDestination: React.FC<DetailDestinationProps> = ({
               
               {/* ----- PERUBAHAN SATU-SATUNYA DI SINI ----- */}
               <AddToList 
-                destination={destination} 
-                // Kirim list lengkap ke AddToList. 
-                // Ini masih belum optimal, tapi kita perbaiki nanti.
-                // Untuk sekarang, kita perlu ubah AddToList juga.
-              /> 
+                placeName={destination.Place} 
+              />
               
               <button
                 onClick={handleSearchTourGuideClick}
